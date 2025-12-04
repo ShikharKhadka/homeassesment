@@ -5,13 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Sider = () => {
+  const pathname = usePathname();
+
   return (
     <div className='box'>
 
-      <div className='title'>Assessment Dashboard</div>
-      <CommonLink title='Transaction Table' href=''/>
-      <CommonLink title='Summary Card' href=''/>
-      <CommonLink title='Transaction Table' href=''/>
+      <div className='title'>Dashboard</div>
+      <CommonLink title='Transaction Table' href='' isActive={pathname == '/'} />
+      <CommonLink title='Summary Card' href='' isActive={pathname == '/summary-card'} />
+      <CommonLink title='Transaction Table' href='' isActive={pathname == '/transaction-table'} />
     </div>
 
   )
@@ -20,12 +22,10 @@ const Sider = () => {
 export default Sider
 
 
-export const CommonLink = ({title,href}:{title :string,href: string}) => {
+export const CommonLink = ({ title, href, isActive }: { title: string, href: string, isActive: boolean }) => {
 
-  const pathname = usePathname();
-  console.log(pathname);
   return (
-    <div className='siderBox' style={{backgroundColor : pathname == '/' ? '#3f51b5': 'white',color:pathname == '/' ? 'white': 'black' }}>
+    <div className='siderBox' style={{ backgroundColor: isActive ? '#3f51b5' : 'white', color: isActive ? 'white' : 'black' }}>
       <Link href={href}>{title}</Link>
     </div>
   )

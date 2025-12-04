@@ -4,7 +4,7 @@ import './header.css';
 const Header = () => {
   return (
     <div className='heading1 card'>
-      Home Assesment
+      Home
     </div>
   )
 }

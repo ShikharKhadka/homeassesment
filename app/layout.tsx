@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Sider from "./component/sider/sider";
 import Header from "./component/header/header";
+import { MainComponent } from "./component/layout/layout";
 
 
 
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex ">
-        <Sider/>
+        <Sider />
         <div className="flex flex-col">
-          <Header/>
-          <main>{children}</main>
+          <Header />
+          <main>
+            <MainComponent children={children} />
+          </main>
         </div>
       </body>
     </html>

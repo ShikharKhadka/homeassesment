@@ -2,10 +2,8 @@
 
 :root {
   --background: #ffffff;
-  --cardheight:100vh;
+  --cardheight: 100vh;
 }
-
-
 
 /* @theme inline {
   --color-background: var(--background);
@@ -23,7 +21,7 @@
 
 body {
   /* background: var(--background); */
-  font-family: sans-serif,Arial, Helvetica, ;
+  font-family: sans-serif, Arial, Helvetica;
   color: black;
   font-size: 16px;
 }
@@ -34,6 +32,11 @@ body {
   color: black;
 }
 
-
-
-
+.box1 {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
+  /* height: calc(100vh - 80px); */
+  margin-left: 10px;
+  margin-top: 10px;
+}
