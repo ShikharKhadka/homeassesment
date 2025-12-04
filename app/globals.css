@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --cardheight:100vh;
+}
+
+
+
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  /* background: var(--background); */
+  font-family: sans-serif,Arial, Helvetica, ;
+  color: black;
+  font-size: 16px;
+}
+
+.heading1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+
+
+
