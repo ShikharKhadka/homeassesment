@@ -34,13 +34,15 @@ export default async function TransactionTablePage() {
             await new Promise(resolve => setTimeout(resolve, 1000));
             const b = [];
 
-            for (let i = 0; i < data.length; i = i + 10) {
+            for (let i = 0; i < data.length; i = i + 20) {
                 const d = [];
-                for (let j = i; j <= data.length - 1 && j < i + 10; j++) {
+                for (let j = i; j <= data.length - 1 && j < i + 20; j++) {
                     d.push(data[j]);
                 }
                 b.push(d);
             }
+
+            console.log(b);
 
             const updateCategoryList: string[] = [];
             const updatedTypeList: string[] = [];

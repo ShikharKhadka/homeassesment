@@ -40,21 +40,18 @@ export const TransactionTable = ({ items, categoryList, typeList }: { items: Per
         setFilterList(filterData);
     }, [list]);
 
-    const updateList = useCallback(() => {
-        setCount(prevCount => {
-            const newCount = prevCount + 1;
-
-            if (newCount <= items.length - 1) {
-                setList((prevList) => {
-                    const newList = items[newCount];
-                    const mergedList = [...prevList, ...(newList ?? [])];
-                    return mergedList;
-                });
-            }
-
-            return newCount;
-        });
-    }, [items]);
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization, react-hooks/exhaustive-deps
+    const updateList = () => {
+        const count1 = count + 1;
+        setCount(count1);
+        if (count1 <= items.length - 1) {
+            setList((prevList) => {
+                const newList = items[count1];
+                const mergedList = [...prevList, ...(newList ?? [])];
+                return mergedList;
+            });
+        }
+    };
 
     useEffect(() => {
         let lastScrollTop = 0;
@@ -79,7 +76,6 @@ export const TransactionTable = ({ items, categoryList, typeList }: { items: Per
 
         window.addEventListener("scroll", handleScroll);
 
-        setTimeout(checkBottom, 0); 
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [updateList]);
