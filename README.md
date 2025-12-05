@@ -1,16 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-
-Description
+## Description
 This project is a Netxjs application built with TypeScript and Material-UI (MUI) with SSR and SPA.
 
-Package
-Material Ui
-React Form Hook
-Bar Graph
-Typescript
-Linter
+## Tech Stack
 
+| Package         |
+| --------------- |
+| Material UI     |
+| React Hook Form |
+| Bar Graph       |
+| Typescript      |
+| Linter          |
 
 ## Getting Started
 
