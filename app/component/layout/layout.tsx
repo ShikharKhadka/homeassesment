@@ -1,6 +1,6 @@
 'use client';
 
-import { ListProvider, useLoading } from '@/app/context/listContext';
+import { ListProvider } from '@/app/context/listContext';
 import React, { ReactNode } from 'react'
 
 export const MainComponent = ({ children }: { children: ReactNode }) => {

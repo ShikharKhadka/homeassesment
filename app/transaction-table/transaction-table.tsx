@@ -23,32 +23,38 @@ export const TransactionTable = ({ items, categoryList, typeList }: { items: Per
         setOpenDialog(false);
     }
 
-    const updateList = useCallback(() => {
-        setCount(count + 1);
-        const updateCount = count + 1;
-        if (count <= items.length - 1) {
-            setList((prev) => {
-                const newList = items[updateCount];
-                const mergedList = [...prev, ...newList ?? []];
-                return mergedList;
-            });
-        }
-    }, [count, items]);
 
-    const handleCategoryChange = (event: SelectChangeEvent) => {
+
+    const handleCategoryChange = useCallback((event: SelectChangeEvent) => {
         const category = event.target.value;
         setFilters((prev) => { return { ...prev, category: event.target.value, type: '' } });
         const filterData = list.filter((e) => e.category == category);
         setFilterList(filterData);
 
-    };
+    }, [list]);
 
-    const handleTypeChange = (event: SelectChangeEvent) => {
+    const handleTypeChange = useCallback((event: SelectChangeEvent) => {
         const type = event.target.value;
         setFilters((prev) => { return { type: event.target.value, category: '' } });
         const filterData = list.filter((e) => e.type == type);
         setFilterList(filterData);
-    };
+    }, [list]);
+
+    const updateList = useCallback(() => {
+        setCount(prevCount => {
+            const newCount = prevCount + 1;
+
+            if (newCount <= items.length - 1) {
+                setList((prevList) => {
+                    const newList = items[newCount];
+                    const mergedList = [...prevList, ...(newList ?? [])];
+                    return mergedList;
+                });
+            }
+
+            return newCount;
+        });
+    }, [items]);
 
     useEffect(() => {
         let lastScrollTop = 0;
@@ -61,7 +67,6 @@ export const TransactionTable = ({ items, categoryList, typeList }: { items: Per
             const isScrollingDown = scrollTop > lastScrollTop;
             lastScrollTop = scrollTop;
 
-            // Only load more when scrolling down OR initial page load check
             if ((isScrollingDown || scrollTop === 0) &&
                 scrollTop + windowHeight >= docHeight - 50) {
                 updateList();
@@ -74,25 +79,23 @@ export const TransactionTable = ({ items, categoryList, typeList }: { items: Per
 
         window.addEventListener("scroll", handleScroll);
 
-        // 🔹 Run once on initial mount
-        setTimeout(checkBottom, 0); // ensure DOM is ready
+        setTimeout(checkBottom, 0); 
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [updateList]);
 
     return (
-        <div>
-            <div className="box1" >
-                <div className="flex justify-end p-4"><CButton title="Add New" onClick={() => { setOpenDialog(true) }} /></div>
-                <div className='flex gap-3 p-4'>
+        <div className='w-[85%] md:w-full'>
+            <div className="" >
+                <div className="flex justify-start md:justify-end p-4"><CButton title="Add New" onClick={() => { setOpenDialog(true) }} /></div>
+                <div className="flex flex-col gap-3 p-4 md:flex-row">
                     <CDropdown label='Category' menuList={categoryList} value={filter.category} handelOnClick={handleCategoryChange} />
                     <CDropdown label='Type' menuList={typeList} value={filter.type} handelOnClick={handleTypeChange} />
                     <CButton title='Clear Filter' onClick={() => { setFilters({ category: '', type: '' }) }} />
                 </div>
                 <CTable rows={(filter.category || filter.type) ? filterList : list} />
-                
             </div>
-            <CDialog open={openDilaog} onClose={closeDialog} typeList={typeList} categoryList={categoryList} />
+            <CDialog open={openDilaog} onClose={closeDialog} />
         </div>
     )
 }

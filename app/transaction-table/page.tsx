@@ -2,6 +2,7 @@
 import { TransactionTable } from "./transaction-table";
 import { getList } from "../api/getList";
 import { Suspense } from "react";
+import CLoader from "../component/loader/loader";
 
 export type PersonI = {
     id: number;
@@ -14,7 +15,7 @@ export type PersonI = {
 
 export default async function TransactionTablePage() {
 
-    return <Suspense fallback={<div>.......Loading</div>}>
+    return <Suspense fallback={<CLoader/>}>
         <TransactionsContent />
     </Suspense>
 

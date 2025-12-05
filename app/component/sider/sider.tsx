@@ -9,11 +9,9 @@ const Sider = () => {
 
   return (
     <div className='box'>
-
       <div className='title'>Dashboard</div>
-      <CommonLink title='Transaction Table' href='' isActive={pathname == '/'} />
-      <CommonLink title='Summary Card' href='' isActive={pathname == '/summary-card'} />
-      <CommonLink title='Transaction Table' href='' isActive={pathname == '/transaction-table'} />
+      <CommonLink title='Transaction Table' href='/transaction-table' isActive={pathname == '/transaction-table'} />
+      <CommonLink title='Summary Card' href='/summary-card' isActive={pathname == '/summary-card'} />
     </div>
 
   )

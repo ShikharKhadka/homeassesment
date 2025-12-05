@@ -3,6 +3,10 @@ import "./globals.css";
 import Sider from "./component/sider/sider";
 import Header from "./component/header/header";
 import { MainComponent } from "./component/layout/layout";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import Link from "next/link";
+import { commonColors } from "./colors/color";
+
 
 
 
@@ -18,15 +22,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex ">
-        <Sider />
-        <div className="flex flex-col">
-          <Header />
-          <main>
-            <MainComponent children={children} />
-          </main>
-        </div>
+
+      <body className="md:flex">
+        <style>
+
+        </style>
+        <AppRouterCacheProvider>
+          {/* <MainComponent>{children}</MainComponent> */}
+
+          <Sider />
+          <div className="flex flex-col ">
+            <Header />
+            <div className="pl-2 sm:pl-2" style={{ width: '100%' }}>
+              <div className="mt-4 block md:hidden">
+                <Link style={{ backgroundColor: commonColors.primary, padding: '10px', borderRadius: '8px', marginRight: '10px', color: 'white' }} href='/'>Transaction Table</Link>
+                <Link style={{ backgroundColor: commonColors.primary, padding: '10px', borderRadius: '8px', color: 'white' }} href='/summary-card'> Summary Card</Link>
+              </div>
+              <MainComponent>{children}</MainComponent>
+            </div>
+          </div>
+        </AppRouterCacheProvider>
       </body>
+
     </html>
   );
 }

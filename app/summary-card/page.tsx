@@ -1,19 +1,18 @@
 import React, { Suspense } from 'react'
 import { getList } from '../api/getList';
 import { PersonI } from '../page';
-import { TransactionTable } from '../transaction-table/transaction-table';
 import { Summarycard } from './summary-card';
+import CLoader from '../component/loader/loader';
 
-export default async function TransactionTablePage() {
+export default async function SummaryPage() {
 
-    return <Suspense fallback={<div>.......Loading</div>}>
-        <TransactionsContent />
+    return <Suspense fallback={<CLoader />}>
+        <SummaryContent />
     </Suspense>
 
 
-    async function TransactionsContent() {
+    async function SummaryContent() {
         try {
-            // Server components can use async/await directly
             const response = await getList();
 
             if (response.status !== 200) {
@@ -24,9 +23,18 @@ export default async function TransactionTablePage() {
 
             await new Promise(resolve => setTimeout(resolve, 1000));
 
+            const updateCategoryList: string[] = [];
+
+            data.map((e) => e.category).forEach((f) => {
+                if (!updateCategoryList.includes(f)) {
+                    updateCategoryList.push(f);
+                }
+            });
+
             return (
                 <Summarycard
                     items={data}
+                    categoryList={updateCategoryList}
                 />
             );
         } catch (error: any) {
